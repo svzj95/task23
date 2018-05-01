@@ -6,7 +6,7 @@ public class Task23 {
 
         //Initializing
         int[] mas = new int[10];
-        int maxn_i=-1,minp_i=-1,predmaxn = -1, predminp = -1;
+        int maxn_i=-1,minp_i=-1;
 
         //Filling numbers
         System.out.println("Array:");
@@ -14,32 +14,23 @@ public class Task23 {
             mas[i]=((int) (Math.random()*20)) -10;
             System.out.printf("Value: %d, Index: %d\n",mas[i],i);
         }
-
         //Finding max negative and min positive
-        while(true) {
-            for (int i = 0; i < mas.length; i++) {
-                if ((minp_i == -1) && (mas[i] > 0)) {
+        for(int i=0;i<mas.length;i++){
+            if (maxn_i == -1 || minp_i == -1){
+                if(mas[i]>0){
                     minp_i = i;
-                    continue;
                 }
-                if ((maxn_i == -1) && (mas[i] < 0)) {
+                else if (mas[i] < 0){
                     maxn_i = i;
-                    continue;
                 }
-                if ((mas[i] > 0) &&  (mas[i] < mas[minp_i])) {
-                    minp_i = i;
-                    continue;
-                }
-                if ((mas[i] < 0) && (mas[i] > mas[maxn_i])) {
-                    maxn_i = i;
-                    continue;
-                }
+                continue;
             }
-            if ((maxn_i == predmaxn) && (minp_i == predminp)) {
-                break;
-            } else {
-                predmaxn = maxn_i;
-                predminp = minp_i;
+            if (mas[i] > 0 && mas[i] < mas[minp_i]){
+                minp_i = i;
+                continue;
+            }
+            if (mas[i] < 0 && mas[i] > mas[maxn_i]){
+                maxn_i = i;
             }
         }
         System.out.println("Min positive: " +mas[minp_i]);
